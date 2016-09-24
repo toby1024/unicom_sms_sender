@@ -1,4 +1,6 @@
-require 'spec_helper'
+require "base64"
+require "erb"
+require 'mechanize'
 module UnicomSmsSender
   class SendUtil
     attr_reader :app_name, :message_type, :phone, :content
@@ -17,7 +19,7 @@ module UnicomSmsSender
     end
 
     def send
-      send_sms(path, content)
+      p send_sms(phone, content)
     end
 
     private
@@ -26,8 +28,6 @@ module UnicomSmsSender
     end
 
     def send_sms(phone, message)
-      require "base64"
-      require "erb"
       service_id = configuration.send_service_id
       send_key = configuration.send_send_key
       cp_id = configuration.send_cpid
